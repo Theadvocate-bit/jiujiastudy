@@ -14,6 +14,7 @@
   "data_as_of": "2026-10-06T07:01:11+00:00",   做这份学习页时用的快照时间
   "materials_read": true,               读没读课件文字
   "promise": "明天的 Zoom 课……",         页面上「看完你就」后面那一句
+  "objectives": ["能……", "能……", "能……"],  页面上「学习目标」的 3–5 条，可选（list of str，每条非空）
   "minutes_total": 190,
   "blocks": [{"id": "b1", "label": "第 1、6 节 + 术语", "minutes": 60, "anchor": "#s1",
               "before": "2026-10-07T09:00:00+11:00", "before_label": "周三 09:00 Zoom 课前", "after": null}],
@@ -99,6 +100,14 @@ def validate(m):
         for k in ("due", "after"):
             if t.get(k) and parse_when(t[k]) is None:
                 bad.append(f"todos[{i}] {k} 认不出")
+    objectives = m.get("objectives")
+    if objectives is not None:
+        if not isinstance(objectives, list) or not objectives:
+            bad.append("objectives 要是非空列表")
+        else:
+            for i, o in enumerate(objectives):
+                if not isinstance(o, str) or not o.strip():
+                    bad.append(f"objectives[{i}] 要是非空字符串")
     return bad
 
 

@@ -66,6 +66,22 @@ class Validate(unittest.TestCase):
     def test_schema_不对就不认(self):
         self.assertTrue(self.bad(lambda m: m.update(schema=2)))
 
+    def test_objectives_可选_不写也不报错(self):
+        self.assertEqual(cc_learn.validate(GOOD), [])
+
+    def test_objectives_空列表或不是列表就报错(self):
+        self.assertIn("objectives 要是非空列表", self.bad(lambda m: m.update(objectives=[])))
+        self.assertIn("objectives 要是非空列表", self.bad(lambda m: m.update(objectives="能……")))
+
+    def test_objectives_有非空字符串就通过(self):
+        good = copy.deepcopy(GOOD)
+        good["objectives"] = ["能说出 X 的三种做法", "能用自己的话解释 Y 的原理"]
+        self.assertEqual(cc_learn.validate(good), [])
+
+    def test_objectives_空字符串或数字就报错(self):
+        self.assertIn("objectives[0] 要是非空字符串", self.bad(lambda m: m.update(objectives=[""])))
+        self.assertIn("objectives[1] 要是非空字符串", self.bad(lambda m: m.update(objectives=["能……", 3])))
+
     def test_不是对象(self):
         self.assertEqual(cc_learn.validate([]), ["不是 JSON 对象"])
 
