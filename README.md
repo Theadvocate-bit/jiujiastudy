@@ -2,6 +2,8 @@
 
 给用第二语言上课的留学生的 Canvas / Moodle 学习手帐：盯 deadline、排本周该学什么、按完成情况给下一步。它是一个 Agent Skill，装在你自己的电脑上，数据存在你自己的文件夹里。
 
+> **这是 fork。** 上游（原版）是 [jiujiastudy/jiujiastudy](https://github.com/jiujiastudy/jiujiastudy)。这个 fork 在上游基础上做了两件事：给每门课的本周学习页加了 **学习目标** 和 **建议预习** 两节，清单文件里相应加了可选的 `objectives` 字段；其余功能保持上游一致。改动细节见下面的「这个 fork 改了什么」。
+
 [![tests](https://github.com/jiujiastudy/jiujiastudy/actions/workflows/ci.yml/badge.svg)](https://github.com/jiujiastudy/jiujiastudy/actions/workflows/ci.yml)
 [![License: PolyForm Noncommercial](https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](#要求)
@@ -9,7 +11,7 @@
 ## 它做什么
 
 - **周报（本周清单）**：每门课这周要交什么、要学什么、先做哪件，一页看完；每天一件必做。打 `/jiujiastudy` 就会重新核对一遍，有变化告诉你变了什么。
-- **本周学习页**：打 `/jj-learn`，每门课这周的内容用英文配中文讲清楚，带自测题；不说哪门就全做，最急的先做。
+- **本周学习页**：打 `/jj-learn`，每门课这周的内容用英文配中文讲清楚，带**学习目标**（这周要拿到的 3–5 项具体能力，能自己对着打勾）、**建议预习**（进深入内容前先看的 1–3 份材料，标出处、时长和对应目标）和自测题；不说哪门就全做，最急的先做。
 - **Deadline 雷达**：每门课下一件要交什么、最急的一件、几件撞在一起的、没写日期的，一页看完。
 - **状态和建议**：按打勾情况和你说的话判断正常、落后、过载，给一句具体建议。
 - **读得全**：课件、公告、作业页，加上 Canvas 里嵌的工具（Zoom、阅读清单、录播）和老师放在 Padlet、Google 文档等网站上的东西。
@@ -17,6 +19,22 @@
 - **课件在后台下**：原件自动下到每门课的文件夹，从不让你等。
 - **一句话更新**：打 `/jj-update`，有新版就换上，新功能自动装好。
 - **发到 Canvas 之前先过你的手**：发帖、发站内信、交作业都先给预览，再弹系统窗口由你本人点确定。
+
+## 这个 fork 改了什么
+
+只动了学习页，别的照上游：
+
+- **学习页顶部加「学习目标」**：每门课这周 3–5 条「能……」的目标，覆盖识别 / 解释 / 应用三层；每条都能对到页面上哪个概念、哪个作业、哪道自测题，对不上就不写。顶部那句「看完这页你就……」从这些目标里挑最要紧的一条。
+- **学习页加「建议预习」**：进深入内容前先看的 1–3 份材料，标出处（课程说明 / 阅读清单 / 老师公告 / 上次作业反馈 / 上周遗留）、时长，和它对应哪条学习目标；这周没有可提前看的就直说，不硬凑。
+- **自测题对着目标出**：5 题里至少 3 题直接考学习目标，其余补概念的题也标出对应第几条。
+- **清单文件加可选 `objectives` 字段**：跟页面第 2 节一致，向后兼容——不写这个字段的旧清单照旧能用。
+
+上游是 [jiujiastudy/jiujiastudy](https://github.com/jiujiastudy/jiujiastudy)。自己装这个 fork：把下面安装命令里的 `jiujiastudy/jiujiastudy` 换成 `Theadvocate-bit/jiujiastudy`。想跟上游同步：
+
+```bash
+git remote add upstream https://github.com/jiujiastudy/jiujiastudy
+git pull upstream main
+```
 
 ## 要求
 
