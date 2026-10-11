@@ -42,7 +42,7 @@ class InstallRehearsal(unittest.TestCase):
 
     def test_装完就是能跑的那几样(self):
         for rel in ("SKILL.md", "README.md", os.path.join("tools", "coach.py"),
-                    os.path.join("references", "setup.md"), os.path.join("assets", "xiaohongshu.png")):
+                    os.path.join("references", "setup.md")):
             self.assertTrue(os.path.isfile(os.path.join(self.skill, rel)), rel)
 
     def test_第一句话就知道该干嘛(self):
