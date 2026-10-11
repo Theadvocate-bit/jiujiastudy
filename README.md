@@ -2,11 +2,23 @@
 
 给用第二语言上课的留学生的 Canvas / Moodle 学习手帐：盯 deadline、排本周该学什么、按完成情况给下一步。它是一个 Agent Skill，装在你自己的电脑上，数据存在你自己的文件夹里。
 
-> **这是 fork。** 上游（原版）是 [jiujiastudy/jiujiastudy](https://github.com/jiujiastudy/jiujiastudy)。这个 fork 在上游基础上做了两件事：给每门课的本周学习页加了 **学习目标** 和 **建议预习** 两节，清单文件里相应加了可选的 `objectives` 字段；其余功能保持上游一致。改动细节见下面的「这个 fork 改了什么」。
-
-[![tests](https://github.com/jiujiastudy/jiujiastudy/actions/workflows/ci.yml/badge.svg)](https://github.com/jiujiastudy/jiujiastudy/actions/workflows/ci.yml)
 [![License: PolyForm Noncommercial](https://img.shields.io/badge/license-PolyForm%20Noncommercial-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](#要求)
+
+## 关于这个仓库
+
+这是「救驾」的一个独立维护的 fork。
+
+- 原版（上游）是 [jiujiastudy/jiujiastudy](https://github.com/jiujiastudy/jiujiastudy)，代码按 PolyForm Noncommercial 1.0.0 授权。
+- 这个仓库在它的基础上继续做，改动集中在「本周学习页」——加了**学习目标**和**建议预习**两节（见下面「这个 fork 改了什么」）。除了这一块，其余行为跟上游一致。
+- 想用原版完整功能就装上游；想要学习页多了这两节的版本，就装这个仓库。
+
+要跟上游同步：
+
+```bash
+git remote add upstream https://github.com/jiujiastudy/jiujiastudy
+git pull upstream main
+```
 
 ## 它做什么
 
@@ -29,17 +41,10 @@
 - **自测题对着目标出**：5 题里至少 3 题直接考学习目标，其余补概念的题也标出对应第几条。
 - **清单文件加可选 `objectives` 字段**：跟页面第 2 节一致，向后兼容——不写这个字段的旧清单照旧能用。
 
-上游是 [jiujiastudy/jiujiastudy](https://github.com/jiujiastudy/jiujiastudy)。自己装这个 fork：把下面安装命令里的 `jiujiastudy/jiujiastudy` 换成 `Theadvocate-bit/jiujiastudy`。想跟上游同步：
-
-```bash
-git remote add upstream https://github.com/jiujiastudy/jiujiastudy
-git pull upstream main
-```
-
 ## 要求
 
 - **要用能在你电脑上运行命令的 AI：Claude Code 或 Codex。** ChatGPT 网页版、豆包这类只能聊天的网页跑不了救驾。
-- Python 3.10 或更新（CI 在 3.10–3.14 上测过）。没有的话 AI 会先问你要不要装。
+- Python 3.10 或更新（上游在 3.10–3.14 上测过）。没有的话 AI 会先问你要不要装。
 - 一个能读 Agent Skills、能跑命令的 AI 助手：Claude Code、Codex 都行。
 - Windows、macOS、Linux 都行。
 
@@ -47,11 +52,11 @@ git pull upstream main
 
 跟你的 AI 说一句（两种说法都行）：
 
-> 帮我安装 救驾：https://github.com/jiujiastudy/jiujiastudy
+> 帮我安装 救驾：https://github.com/Theadvocate-bit/jiujiastudy
 
-> 帮我安装 GitHub 上的 jiujiastudy/jiujiastudy
+> 帮我安装 GitHub 上的 Theadvocate-bit/jiujiastudy
 
-两句都带了仓库地址（`jiujiastudy/jiujiastudy` 就是地址）。光说「救驾」或「jiujia」不行：模型不认识新仓库，可能装到别人的同名仓库，而这个技能会拿到你的 Canvas token。请只从上面这个地址安装。
+两句都带了仓库地址（`Theadvocate-bit/jiujiastudy` 就是地址）。光说「救驾」或「jiujia」不行：模型不认识新仓库，可能装到别人的同名仓库，而这个技能会拿到你的 Canvas token。请只从上面这个地址安装。
 
 **先改一个设置，能省掉你很多次点「允许」**：输入框左下角的权限设置，Claude Code 选「Auto」，Codex 选「帮我批准」。改完它会自己判断哪些操作安全，只有要紧的才来问你。偶尔某一步被自动模式拦下（比如「刚下载的代码」），AI 会请你临时换成「每次询问」、回一句「继续」，跑完再换回来。救驾不会替你改任何权限设置。
 
@@ -66,18 +71,18 @@ git pull upstream main
 Claude Code（macOS / Linux / Git Bash）：
 
 ```bash
-git clone https://github.com/jiujiastudy/jiujiastudy ~/.claude/skills/jiujiastudy
+git clone https://github.com/Theadvocate-bit/jiujiastudy ~/.claude/skills/jiujiastudy
 ```
 
 Claude Code（Windows PowerShell）：
 
 ```powershell
-git clone https://github.com/jiujiastudy/jiujiastudy "$HOME\.claude\skills\jiujiastudy"
+git clone https://github.com/Theadvocate-bit/jiujiastudy "$HOME\.claude\skills\jiujiastudy"
 ```
 
 Codex 及其它读 Agent Skills 的工具：把上面的 `.claude` 换成 `.agents`。
 
-没有 git：下载 [main.zip](https://github.com/jiujiastudy/jiujiastudy/archive/refs/heads/main.zip)，解压出来的文件夹叫 `jiujiastudy-main`，改名成 `jiujiastudy` 再放到上面的位置。Windows「全部解压」会多套一层，确认 `SKILL.md` 直接在 `jiujiastudy` 文件夹里，多套了一层就把里面那层拿出来。
+没有 git：下载 [main.zip](https://github.com/Theadvocate-bit/jiujiastudy/archive/refs/heads/main.zip)，解压出来的文件夹叫 `jiujiastudy-main`，改名成 `jiujiastudy` 再放到上面的位置。Windows「全部解压」会多套一层，确认 `SKILL.md` 直接在 `jiujiastudy` 文件夹里，多套了一层就把里面那层拿出来。
 
 更新：跟 AI 说「更新救驾」，或者自己在 `skills/jiujiastudy` 里执行
 
@@ -140,7 +145,7 @@ token 只要给一次：它存在你电脑上的 `~/.config/jiujiastudy/token`�
 
 ## 反馈
 
-问题和建议发到 [Issues](https://github.com/jiujiastudy/jiujiastudy/issues)，或在小红书、抖音私信 @悉尼苏丹（控制canvas版）。
+问题和建议在这个仓库开 [Issue](https://github.com/Theadvocate-bit/jiujiastudy/issues)。
 
 ## 依赖
 
@@ -149,3 +154,5 @@ token 只要给一次：它存在你电脑上的 `~/.config/jiujiastudy/token`�
 ## 许可
 
 PolyForm Noncommercial 1.0.0，见 [LICENSE](LICENSE)：自己学习、学校、非营利机构都可以免费用，不能用在商业用途；不提供任何担保。v0.2.x 及更早的版本仍按 MIT。与 Instructure 无关，未获其背书；Canvas 是 Instructure, Inc. 的商标。使用前请自行确认它符合你所在学校的规定。
+
+代码源自 [jiujiastudy/jiujiastudy](https://github.com/jiujiastudy/jiujiastudy)，按其原许可使用。
